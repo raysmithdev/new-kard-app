@@ -6,6 +6,7 @@ import * as actions from './actions';
 
 import Firebase from '../includes/firebase/firebase';
 import LoginScreen from './screens/LoginScreen';
+import SendKardScreen from './screens/SendKardScreen';
 
 export class Kard extends React.Component {
   constructor(props) {
