@@ -1,26 +1,40 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Text, View } from 'react-native';
-
+import * as firebase from 'firebase';
 import * as actions from './actions';
 
+import Firebase from '../includes/firebase/firebase';
 import LoginScreen from './screens/LoginScreen';
 
 export class Kard extends React.Component {
+  constructor(props) {
+    super(props);
+
+    // Should these be in the constructor or in componentDidMount()?
+    Firebase.initialize();
+    actions.getInitialView();
+  }
 
   render() {
-    return (
-      <LoginScreen
-        actions={actions}
-      />
-    );
+    if (this.props.userLoaded) {
+      return (
+        <LoginScreen
+          actions={actions}
+        />
+      );
+    }
+    else {
+      return null;
+    }
   }
 }
 
 const mapStateToProps = state => ({
   loading: state.loading,
-  error: state.error
+  error: state.error,
+  userLoaded: state.userLoaded,
+  initialView: state.initialView
 });
 
 const mapDispatchToProps = dispatch => ({
