@@ -17,13 +17,14 @@ export class Kard extends React.Component {
   }
 
   render() {
-
-    if (this.props.scene.userLoaded) {
-      return (
-        <LoginScreen
-          actions={actions}
-        />
-      );
+    const { userLoaded, initialView } = this.props.scene;
+    if (userLoaded) {
+      if (initialView === 'Login') {
+        return <LoginScreen actions={actions} />;
+      }
+      else {
+        return <SendKardScreen actions={actions} />;
+      }
     }
     else {
       return null;
