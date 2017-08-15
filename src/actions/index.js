@@ -6,10 +6,10 @@ export const setInitialView = initialView => ({
   initialView
 });
 
-export const getInitialView = () => {
+export const getInitialView = dispatch => {
   firebase.auth().onAuthStateChanged((user) => {
     let initialView = user ? 'Home' : 'Login';
 
-    setInitialView(initialView);
+    dispatch(setInitialView(initialView));
   });
 };

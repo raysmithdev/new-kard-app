@@ -13,7 +13,7 @@ export class Kard extends React.Component {
 
     // Should these be in the constructor or in componentDidMount()?
     Firebase.initialize();
-    actions.getInitialView();
+    actions.getInitialView(this.props.dispatch);
   }
 
   render() {
@@ -37,8 +37,8 @@ const mapStateToProps = state => ({
   initialView: state.initialView
 });
 
-const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(actions, dispatch)
-});
+// const mapDispatchToProps = dispatch => ({
+//   actions: bindActionCreators(actions, dispatch)
+// });
 
 export default connect(mapStateToProps)(Kard);
