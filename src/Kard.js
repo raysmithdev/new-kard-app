@@ -11,14 +11,14 @@ import SendKardScreen from './screens/SendKardScreen';
 export class Kard extends React.Component {
   constructor(props) {
     super(props);
-
     // Should these be in the constructor or in componentDidMount()?
     Firebase.initialize();
     actions.getInitialView(this.props.dispatch);
   }
 
   render() {
-    if (this.props.userLoaded) {
+
+    if (this.props.scene.userLoaded) {
       return (
         <LoginScreen
           actions={actions}
@@ -31,12 +31,14 @@ export class Kard extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  loading: state.loading,
-  error: state.error,
-  userLoaded: state.userLoaded,
-  initialView: state.initialView
-});
+const mapStateToProps = state => {
+  return {
+    kard: state.kard,
+    scene: state.scene
+  };
+}
+
+  ;
 
 // const mapDispatchToProps = dispatch => ({
 //   actions: bindActionCreators(actions, dispatch)
