@@ -5,7 +5,6 @@ import store from './src/store';
 import * as firebase from 'firebase';
 import * as actions from './src/actions';
 
-import Kard from './src/Kard';
 import Firebase from './includes/firebase/firebase';
 import LaunchScreen from './src/screens/LaunchScreen';
 import LoginScreen from './src/screens/LoginScreen';
