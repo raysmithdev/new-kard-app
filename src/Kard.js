@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as firebase from 'firebase';
 import * as actions from './actions';
+import { Scene, Router, Actions } from 'react-native-router-flux';
 
 import Firebase from '../includes/firebase/firebase';
 import LoginScreen from './screens/LoginScreen';
@@ -16,26 +17,60 @@ export class Kard extends React.Component {
     this.props.dispatch(actions.getInitialView());
   }
 
+  // componentDidMount() {
+  //   const { userLoaded, initialView } = this.props.scene;
+  //   if (userLoaded) {
+  //     if (initialView === 'SendKardScreen') {
+  //       Actions.SendKardScreen;
+  //     }
+  //     else {
+  //       Actions.LoginScreen;
+  //     }
+  //   }
+  // }
+
+  // render() {
+  //   const { userLoaded, initialView } = this.props.scene;
+  //   if (userLoaded) {
+  //     if (initialView === 'Login') {
+  //       return (
+  //         <LoginScreen
+  //           actions={actions}
+  //           dispatch={this.props.dispatch}
+  //           kard={this.props.kard}
+  //         />
+  //       );
+  //     }
+  //     else {
+  //       return <SendKardScreen actions={actions} />;
+  //     }
+  //   }
+  //   else {
+  //     return null;
+  //   }
+  // }
   render() {
-    // console.log(actions);
-    const { userLoaded, initialView } = this.props.scene;
-    if (userLoaded) {
-      if (initialView === 'Login') {
-        return (
-          <LoginScreen
+    console.log(Actions.scene);
+    return (
+      <Router>
+        <Scene key='root'>
+          <Scene
+            key='LoginScreen'
+            component={LoginScreen}
+            title='Login'
             actions={actions}
             dispatch={this.props.dispatch}
             kard={this.props.kard}
           />
-        );
-      }
-      else {
-        return <SendKardScreen actions={actions} />;
-      }
-    }
-    else {
-      return null;
-    }
+          <Scene
+            key='SendKardScreen'
+            component={SendKardScreen}
+            title='Send Kard'
+            actions={actions}
+          />
+        </Scene>
+      </Router>
+    );
   }
 }
 

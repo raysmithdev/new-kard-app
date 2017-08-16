@@ -1,62 +1,66 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
 import { Text, TextInput, View, Button, Image, StyleSheet } from 'react-native';
 
 import ViewContainer from '../components/ViewContainer';
 import StatusBarContainer from '../components/StatusBarContainer';
 
-export default function LoginScreen(props) {
-  const onEmailChange = (email) => {
-    props.dispatch(props.actions.setLoginEmail(email));
+class LoginScreen extends React.Component {
+  onEmailChange(email) {
+    this.props.dispatch(this.props.actions.setLoginEmail(email));
   };
-  const onPasswordChange = (password) => {
-    props.dispatch(props.actions.setLoginPassword(password));
+  onPasswordChange(password) {
+    this.props.dispatch(this.props.actions.setLoginPassword(password));
   };
-  const handleLoginSubmit = () => {
-    props.actions.firebaseSignup(props.kard.loginEmail, props.kard.loginPassword);
+  handleLoginSubmit() {
+    this.props.actions.firebaseSignup(this.props.kard.loginEmail, this.props.kard.loginPassword);
   };
 
-  return (
-    <ViewContainer>
-      <StatusBarContainer />
-      <View style={styles.loginView}>
-        <Image
-          style={styles.logoImage}
-          source={require('../../assets/logo.png')}
+  render () {
+    return (
+      <ViewContainer>
+        <StatusBarContainer />
+        <View style={styles.loginView}>
+          <Image
+            style={styles.logoImage}
+            source={require('../../assets/logo.png')}
         />
-        <Text style={styles.welcomeText}>
+          <Text style={styles.welcomeText}>
           Welcome to Kard App!
           Please enter your login information below to get started.
         </Text>
-        <TextInput
-          autoCorrect={false}
-          autoFocus
-          keyboardType={'email-address'}
-          placeholder='Enter your email address'
-          placeholderTextColor='deepskyblue'
-          returnKeyType='next'
-          style={styles.textInput}
-          onChangeText={(e) => onEmailChange(e)}
+          <TextInput
+            autoCorrect={false}
+            autoFocus
+            keyboardType={'email-address'}
+            placeholder='Enter your email address'
+            placeholderTextColor='deepskyblue'
+            returnKeyType='next'
+            style={styles.textInput}
+            onChangeText={(e) => this.onEmailChange(e)}
         />
-        <TextInput
-          autoCorrect={false}
-          placeholder='Enter your password'
-          placeholderTextColor='deepskyblue'
-          returnKeyType='done'
-          secureTextEntry
-          style={styles.textInput}
-          onChangeText={(e) => onPasswordChange(e)}
+          <TextInput
+            autoCorrect={false}
+            placeholder='Enter your password'
+            placeholderTextColor='deepskyblue'
+            returnKeyType='done'
+            secureTextEntry
+            style={styles.textInput}
+            onChangeText={(e) => this.onPasswordChange(e)}
         />
-        <View style={styles.submitView}>
-          <Button
-            accessibilityLabel='Submit your login information'
-            color='deepskyblue'
-            title='Submit'
-            onPress={() => handleLoginSubmit()}
+          <View style={styles.submitView}>
+            <Button
+              accessibilityLabel='Submit your login information'
+              color='deepskyblue'
+              title='Submit'
+              onPress={() => this.handleLoginSubmit()}
           />
+          </View>
         </View>
-      </View>
-    </ViewContainer>
-  );
+      </ViewContainer>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -83,3 +87,5 @@ const styles = StyleSheet.create({
     marginTop: 10
   }
 });
+
+export default connect(({ routes }) => ({ routes }))(LoginScreen);

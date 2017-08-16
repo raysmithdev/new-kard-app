@@ -20,7 +20,7 @@ export const setInitialView = initialView => ({
 
 export const getInitialView = () => dispatch => {
   firebase.auth().onAuthStateChanged((user) => {
-    let initialView = user ? 'Home' : 'Login';
+    let initialView = user ? 'SendKardScreen' : 'LoginScreen';
     dispatch(setInitialView(initialView));
   });
 };
