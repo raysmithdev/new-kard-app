@@ -35,7 +35,7 @@ export const getInitialView = () => dispatch => {
     firebase.auth().onAuthStateChanged((user) => {
       dispatch(initialViewSuccess());
       if (user) {
-        Actions.SendKardScreen();
+        Actions.TabBar();
       }
       else {
         Actions.LoginScreen();

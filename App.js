@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect, Provider } from 'react-redux';
 import { Router, Scene } from 'react-native-router-flux';
+import { Icon } from 'react-native-elements';
 import store from './src/store';
 import * as firebase from 'firebase';
 import * as actions from './src/actions';
@@ -35,11 +36,17 @@ export default class App extends React.Component {
               actions={actions}
             />
             <Scene
-              key='SendKardScreen'
-              component={SendKardScreen}
-              title='Send Kard'
-              actions={actions}
-            />
+              key='TabBar'
+              tabs
+            >
+              <Scene
+                key='SendKardScreen'
+                component={SendKardScreen}
+                title='Send Kard'
+                actions={actions}
+                icon={() => <Icon name='send' size={35} />}
+              />
+            </Scene>
           </Scene>
         </ReduxRouter>
       </Provider>
