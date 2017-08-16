@@ -13,14 +13,15 @@ export class Kard extends React.Component {
     super(props);
     // Should these be in the constructor or in componentDidMount()?
     Firebase.initialize();
-    actions.getInitialView(this.props.dispatch);
+    this.props.dispatch(actions.getInitialView());
   }
 
   render() {
+    // console.log(actions);
     const { userLoaded, initialView } = this.props.scene;
     if (userLoaded) {
       if (initialView === 'Login') {
-        return <LoginScreen actions={actions} />;
+        return <LoginScreen actions={actions} dispatch={this.props.dispatch} />;
       }
       else {
         return <SendKardScreen actions={actions} />;
@@ -37,12 +38,6 @@ const mapStateToProps = state => {
     kard: state.kard,
     scene: state.scene
   };
-}
-
-  ;
-
-// const mapDispatchToProps = dispatch => ({
-//   actions: bindActionCreators(actions, dispatch)
-// });
+};
 
 export default connect(mapStateToProps)(Kard);

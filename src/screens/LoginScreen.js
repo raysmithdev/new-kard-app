@@ -5,6 +5,12 @@ import ViewContainer from '../components/ViewContainer';
 import StatusBarContainer from '../components/StatusBarContainer';
 
 export default function LoginScreen(props) {
+  const onEmailChange = (email) => {
+    props.dispatch(props.actions.setLoginEmail(email));
+  };
+  const onPasswordChange = (password) => {
+    props.dispatch(props.actions.setLoginPassword(password));
+  };
   const handleLoginSubmit = () => {
     console.log('Login submitted');
   };
@@ -29,6 +35,7 @@ export default function LoginScreen(props) {
           placeholderTextColor='deepskyblue'
           returnKeyType='next'
           style={styles.textInput}
+          onChangeText={(e) => onEmailChange(e)}
         />
         <TextInput
           autoCorrect={false}
@@ -37,6 +44,7 @@ export default function LoginScreen(props) {
           returnKeyType='done'
           secureTextEntry
           style={styles.textInput}
+          onChangeText={(e) => onPasswordChange(e)}
         />
         <View style={styles.submitView}>
           <Button
