@@ -7,6 +7,7 @@ import * as actions from '../actions';
 
 import ViewContainer from '../components/ViewContainer';
 import StatusBarContainer from '../components/StatusBarContainer';
+import AccountList from '../components/account/AccountList';
 
 class AccountScreen extends React.Component {
 
@@ -24,6 +25,7 @@ class AccountScreen extends React.Component {
             ACCOUNT SCREEN
           </Text>
         </View>
+        <AccountList />
       </ViewContainer>
     );
   }
