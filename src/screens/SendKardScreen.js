@@ -6,6 +6,10 @@ import ViewContainer from '../components/ViewContainer';
 import StatusBarContainer from '../components/StatusBarContainer';
 
 export default function SendKardScreen(props) {
+  const sendKard = () => {
+    props.actions.firebaseLogout();
+  };
+
   return (
     <ViewContainer>
       <StatusBarContainer style={{height: 20}} />
@@ -24,7 +28,7 @@ export default function SendKardScreen(props) {
         <UserContentButtons navigation={this.props.navigation} /> */}
         <Button
           title='SEND'
-          onPress={() => this.sendKard()} />
+          onPress={() => sendKard()} />
       </View>
     </ViewContainer>
   );

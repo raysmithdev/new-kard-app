@@ -42,7 +42,7 @@ export const firebaseLogin = (loginEmail, loginPassword) => {
 };
 
 export const firebaseLogout = () => {
-  firebase.auth().signout()
+  firebase.auth().signOut()
     .catch((err) => {
       console.log(`${err.code}: ${err.message}`);
     });
