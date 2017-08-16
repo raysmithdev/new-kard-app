@@ -26,9 +26,23 @@ export const getInitialView = () => dispatch => {
 };
 
 export const firebaseSignup = (loginEmail, loginPassword) => {
-  console.log('Signing Up');
   firebase.auth()
     .createUserWithEmailAndPassword(loginEmail, loginPassword)
+    .catch((err) => {
+      console.log(`${err.code}: ${err.message}`);
+    });
+};
+
+export const firebaseLogin = (loginEmail, loginPassword) => {
+  firebase.auth()
+    .signInWithEmailAndPassword(loginEmail, loginPassword)
+    .catch((err) => {
+      console.log(`${err.code}: ${err.message}`);
+    });
+};
+
+export const firebaseLogout = () => {
+  firebase.auth().signout()
     .catch((err) => {
       console.log(`${err.code}: ${err.message}`);
     });
