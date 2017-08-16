@@ -7,6 +7,7 @@ import * as actions from './src/actions';
 
 import Kard from './src/Kard';
 import Firebase from './includes/firebase/firebase';
+import LaunchScreen from './src/screens/LaunchScreen';
 import LoginScreen from './src/screens/LoginScreen';
 import SendKardScreen from './src/screens/SendKardScreen';
 
@@ -15,7 +16,6 @@ const ReduxRouter = connect()(Router);
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-
     Firebase.initialize();
   }
   render() {
@@ -23,6 +23,12 @@ export default class App extends React.Component {
       <Provider store={store}>
         <ReduxRouter>
           <Scene key='root'>
+            <Scene
+              key='LaunchScreen'
+              component={LaunchScreen}
+              actions={actions}
+              initial
+            />
             <Scene
               key='LoginScreen'
               component={LoginScreen}

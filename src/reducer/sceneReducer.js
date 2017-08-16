@@ -2,8 +2,10 @@ import { ActionConst } from 'react-native-router-flux';
 import * as actions from '../actions';
 
 const initialState = {
+  launchLoading: false,
+  launchError: null,
   scene: {},
-  initialView: null,
+  // initialView: null,
   userLoaded: false,
 };
 
@@ -14,10 +16,22 @@ const sceneReducer = (state = initialState, action) => {
       scene: action.scene
     });
 
-  case actions.SET_INITIAL_VIEW:
+  case actions.FETCH_INITIAL_VIEW:
     return Object.assign({}, state, {
+      launchLoading: true
+    });
+
+  case actions.INITIAL_VIEW_SUCCESS:
+    return Object.assign({}, state, {
+      launchLoading: false,
       userLoaded: true,
-      initialView: action.initialView
+      // initialView: action.initialView
+    });
+
+  case actions.INITIAL_VIEW_FAILURE:
+    return Object.assign({}, state, {
+      launchLoading: false,
+      launchError: action.error
     });
 
   default:

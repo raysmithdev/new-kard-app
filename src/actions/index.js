@@ -1,4 +1,5 @@
 import * as firebase from 'firebase';
+import { Actions } from 'react-native-router-flux';
 
 export const SET_LOGIN_EMAIL = 'SET_LOGIN_EMAIL';
 export const setLoginEmail = loginEmail => ({
@@ -12,17 +13,38 @@ export const setLoginPassword = loginPassword => ({
   loginPassword
 });
 
-export const SET_INITIAL_VIEW = 'SET_INITIAL_VIEW';
-export const setInitialView = initialView => ({
-  type: SET_INITIAL_VIEW,
-  initialView
+export const FETCH_INITIAL_VIEW = 'FETCH_INITIAL_VIEW';
+export const fetchInitialView = () => ({
+  type: FETCH_INITIAL_VIEW
+});
+
+export const INITIAL_VIEW_SUCCESS = 'INITIAL_VIEW_SUCCESS';
+export const initialViewSuccess = () => ({
+  type: INITIAL_VIEW_SUCCESS,
+});
+
+export const INITIAL_VIEW_FAILURE = 'INITIAL_VIEW_FAILURE';
+export const initialViewFailure = error => ({
+  type: INITIAL_VIEW_FAILURE,
+  error
 });
 
 export const getInitialView = () => dispatch => {
-  firebase.auth().onAuthStateChanged((user) => {
-    let initialView = user ? 'SendKardScreen' : 'LoginScreen';
-    dispatch(setInitialView(initialView));
-  });
+  dispatch(fetchInitialView());
+  try {
+    firebase.auth().onAuthStateChanged((user) => {
+      dispatch(initialViewSuccess());
+      if (user) {
+        Actions.SendKardScreen();
+      }
+      else {
+        Actions.LoginScreen();
+      }
+    });
+  }
+  catch (error) {
+    dispatch(initialViewFailure(error));
+  }
 };
 
 export const firebaseLogin = (loginEmail, loginPassword) => {

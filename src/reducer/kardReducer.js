@@ -11,6 +11,7 @@ const kardReducer = (state = initialState, action) => {
   switch (action.type) {
 
   case actions.SET_LOGIN_EMAIL:
+    console.log(action);
     return Object.assign({}, state, {
       loginEmail: action.loginEmail
     });

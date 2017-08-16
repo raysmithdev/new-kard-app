@@ -51,4 +51,11 @@ const styles = StyleSheet.create({
   }
 });
 
-export default connect(({ routes }) => ({ routes }))(SendKardScreen);
+const mapStateToProps = state => {
+  return {
+    kard: state.kard,
+    scene: state.scene
+  };
+};
+
+export default connect(mapStateToProps)(SendKardScreen);

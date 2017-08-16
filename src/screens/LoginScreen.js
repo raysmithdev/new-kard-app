@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Actions } from 'react-native-router-flux';
 import { Text, TextInput, View, Button, Image, StyleSheet } from 'react-native';
 
 import ViewContainer from '../components/ViewContainer';
@@ -25,11 +24,11 @@ class LoginScreen extends React.Component {
           <Image
             style={styles.logoImage}
             source={require('../../assets/logo.png')}
-        />
+          />
           <Text style={styles.welcomeText}>
           Welcome to Kard App!
           Please enter your login information below to get started.
-        </Text>
+          </Text>
           <TextInput
             autoCorrect={false}
             autoFocus
@@ -39,7 +38,7 @@ class LoginScreen extends React.Component {
             returnKeyType='next'
             style={styles.textInput}
             onChangeText={(e) => this.onEmailChange(e)}
-        />
+          />
           <TextInput
             autoCorrect={false}
             placeholder='Enter your password'
@@ -48,14 +47,14 @@ class LoginScreen extends React.Component {
             secureTextEntry
             style={styles.textInput}
             onChangeText={(e) => this.onPasswordChange(e)}
-        />
+          />
           <View style={styles.submitView}>
             <Button
               accessibilityLabel='Submit your login information'
               color='deepskyblue'
               title='Submit'
               onPress={() => this.handleLoginSubmit()}
-          />
+            />
           </View>
         </View>
       </ViewContainer>
@@ -88,4 +87,11 @@ const styles = StyleSheet.create({
   }
 });
 
-export default connect(({ routes }) => ({ routes }))(LoginScreen);
+const mapStateToProps = state => {
+  return {
+    kard: state.kard,
+    scene: state.scene
+  };
+};
+
+export default connect(mapStateToProps)(LoginScreen);
