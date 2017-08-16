@@ -21,7 +21,13 @@ export class Kard extends React.Component {
     const { userLoaded, initialView } = this.props.scene;
     if (userLoaded) {
       if (initialView === 'Login') {
-        return <LoginScreen actions={actions} dispatch={this.props.dispatch} />;
+        return (
+          <LoginScreen
+            actions={actions}
+            dispatch={this.props.dispatch}
+            kard={this.props.kard}
+          />
+        );
       }
       else {
         return <SendKardScreen actions={actions} />;

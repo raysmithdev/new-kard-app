@@ -8,7 +8,6 @@ const initialState = {
 };
 
 const kardReducer = (state = initialState, action) => {
-  console.log('reducer', state.loginEmail, state.loginPassword);
   switch (action.type) {
 
   case actions.SET_LOGIN_EMAIL:

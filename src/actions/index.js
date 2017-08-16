@@ -24,3 +24,12 @@ export const getInitialView = () => dispatch => {
     dispatch(setInitialView(initialView));
   });
 };
+
+export const firebaseSignup = (loginEmail, loginPassword) => {
+  console.log('Signing Up');
+  firebase.auth()
+    .createUserWithEmailAndPassword(loginEmail, loginPassword)
+    .catch((err) => {
+      console.log(`${err.code}: ${err.message}`);
+    });
+};

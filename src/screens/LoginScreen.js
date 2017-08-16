@@ -12,7 +12,7 @@ export default function LoginScreen(props) {
     props.dispatch(props.actions.setLoginPassword(password));
   };
   const handleLoginSubmit = () => {
-    console.log('Login submitted');
+    props.actions.firebaseSignup(props.kard.loginEmail, props.kard.loginPassword);
   };
 
   return (
