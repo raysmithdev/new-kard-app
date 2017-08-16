@@ -1,37 +1,41 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
 import { StyleSheet, Text, View, TextInput } from 'react-native';
 import { Button } from 'react-native-elements';
 
 import ViewContainer from '../components/ViewContainer';
 import StatusBarContainer from '../components/StatusBarContainer';
 
-export default function SendKardScreen(props) {
-  const sendKard = () => {
-    props.actions.firebaseLogout();
+class SendKardScreen extends React.Component {
+  sendKard() {
+    this.props.actions.firebaseLogout();
   };
 
-  return (
-    <ViewContainer>
-      <StatusBarContainer style={{height: 20}} />
-      <View>
-        <Text style={styles.sendEmailText}>
+  render() {
+    return (
+      <ViewContainer>
+        <StatusBarContainer style={{height: 20}} />
+        <View>
+          <Text style={styles.sendEmailText}>
           Who would you like to send a Kard to?
         </Text>
-        <TextInput
-          style={styles.emailInput}
-          autoFocus
-          keyboardType='email-address'
-          placeholder='Enter an email address'
+          <TextInput
+            style={styles.emailInput}
+            autoFocus
+            keyboardType='email-address'
+            placeholder='Enter an email address'
          />
-        {/* <ContactInfoButtons navigation={this.props.navigation} />
+          {/* <ContactInfoButtons navigation={this.props.navigation} />
         <SocialMediaButtons navigation={this.props.navigation} />
         <UserContentButtons navigation={this.props.navigation} /> */}
-        <Button
-          title='SEND'
-          onPress={() => sendKard()} />
-      </View>
-    </ViewContainer>
-  );
+          <Button
+            title='SEND'
+            onPress={() => this.sendKard()} />
+        </View>
+      </ViewContainer>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -46,3 +50,5 @@ const styles = StyleSheet.create({
     borderColor: 'gray'
   }
 });
+
+export default connect(({ routes }) => ({ routes }))(SendKardScreen);

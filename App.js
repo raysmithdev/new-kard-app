@@ -1,14 +1,42 @@
 import React from 'react';
-import { Provider } from 'react-redux';
+import { connect, Provider } from 'react-redux';
+import { Router, Scene } from 'react-native-router-flux';
 import store from './src/store';
+import * as firebase from 'firebase';
+import * as actions from './src/actions';
 
 import Kard from './src/Kard';
+import Firebase from './includes/firebase/firebase';
+import LoginScreen from './src/screens/LoginScreen';
+import SendKardScreen from './src/screens/SendKardScreen';
+
+const ReduxRouter = connect()(Router);
 
 export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    Firebase.initialize();
+  }
   render() {
     return (
       <Provider store={store}>
-        <Kard />
+        <ReduxRouter>
+          <Scene key='root'>
+            <Scene
+              key='LoginScreen'
+              component={LoginScreen}
+              title='Login'
+              actions={actions}
+            />
+            <Scene
+              key='SendKardScreen'
+              component={SendKardScreen}
+              title='Send Kard'
+              actions={actions}
+            />
+          </Scene>
+        </ReduxRouter>
       </Provider>
     );
   }
