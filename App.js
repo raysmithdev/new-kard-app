@@ -29,16 +29,19 @@ export default class App extends React.Component {
               component={LaunchScreen}
               actions={actions}
               initial
+              hideNavBar
             />
             <Scene
               key='LoginScreen'
               component={LoginScreen}
               title='Login'
               actions={actions}
+              hideNavBar
             />
             <Scene
               key='TabBar'
               tabs
+              hideNavBar
             >
               <Scene
                 key='SendKardScreen'
