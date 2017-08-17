@@ -1,4 +1,5 @@
 import * as firebase from 'firebase';
+import Database from '../../includes/firebase/database';
 import { Actions } from 'react-native-router-flux';
 
 export const SET_LOGIN_EMAIL = 'SET_LOGIN_EMAIL';
@@ -62,6 +63,10 @@ export const firebaseLogin = (loginEmail, loginPassword) => {
 export const firebaseSignup = (loginEmail, loginPassword) => {
   firebase.auth()
     .createUserWithEmailAndPassword(loginEmail, loginPassword)
+    .then(user => {
+      console.log(user);
+      Database.addUserEmail(user.uid, 'My Email', user.email);
+    })
     .catch((err) => {
       if (err.code === 'auth/email-already-in-use') {
         firebaseLogin(loginEmail, loginPassword);
