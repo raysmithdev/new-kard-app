@@ -10,7 +10,9 @@ import Firebase from './includes/firebase/firebase';
 import LaunchScreen from './src/screens/LaunchScreen';
 import LoginScreen from './src/screens/LoginScreen';
 import SendKardScreen from './src/screens/SendKardScreen';
+
 import AccountScreen from './src/screens/AccountScreen';
+import AccountListContent from './src/components/account/AccountListContent';
 
 const ReduxRouter = connect()(Router);
 
@@ -49,7 +51,13 @@ export default class App extends React.Component {
                 title='Send Kard'
                 actions={actions}
                 icon={() => <Icon name='send' size={35} />}
-              />
+              >
+                <Scene
+                  key='AccountListContent'
+                  component={AccountListContent}
+                  actions={actions}
+                />
+              </Scene>
               <Scene
                 key='AccountScreen'
                 component={AccountScreen}

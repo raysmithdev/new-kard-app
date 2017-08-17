@@ -1,6 +1,8 @@
 import React from 'react';
 import { List, ListItem } from 'react-native-elements';
 
+import { Actions } from 'react-native-router-flux';
+
 export default AccountList = props => {
   return (
     <List containerStyle={{marginBottom: 20}}>
@@ -17,7 +19,7 @@ export default AccountList = props => {
       <ListItem
         key={'Emails'}
         title='Emails'
-        onPress={() => console.log('Emails')}
+        onPress={() => console.log(Actions)}
       />
       <ListItem
         key={'Websites'}
