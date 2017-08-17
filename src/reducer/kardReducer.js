@@ -4,7 +4,8 @@ const initialState = {
   loading: false,
   error: null,
   loginEmail: null,
-  loginPassword: null
+  loginPassword: null,
+
 };
 
 const kardReducer = (state = initialState, action) => {
@@ -18,6 +19,11 @@ const kardReducer = (state = initialState, action) => {
   case actions.SET_LOGIN_PASSWORD:
     return Object.assign({}, state, {
       loginPassword: action.loginPassword
+    });
+
+  case actions.SET_USER:
+    return Object.assign({}, state, {
+      user: action.user
     });
 
   default:

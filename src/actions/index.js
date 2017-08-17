@@ -14,6 +14,12 @@ export const setLoginPassword = loginPassword => ({
   loginPassword
 });
 
+export const SET_USER = 'SET_USER';
+export const setUser = user => ({
+  type: SET_USER,
+  user
+});
+
 export const FETCH_INITIAL_VIEW = 'FETCH_INITIAL_VIEW';
 export const fetchInitialView = () => ({
   type: FETCH_INITIAL_VIEW
@@ -36,6 +42,7 @@ export const getInitialView = () => dispatch => {
     firebase.auth().onAuthStateChanged((user) => {
       dispatch(initialViewSuccess());
       if (user) {
+        dispatch(setUser(user));
         Actions.TabBar();
       }
       else {
@@ -64,7 +71,6 @@ export const firebaseSignup = (loginEmail, loginPassword) => {
   firebase.auth()
     .createUserWithEmailAndPassword(loginEmail, loginPassword)
     .then(user => {
-      console.log(user);
       Database.addUserEmail(user.uid, 'My Email', user.email);
     })
     .catch((err) => {
